@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CheckoutController extends AbstractController
 {
-    #[Route('/checkout', name: 'app_checkout')]
+    #[Route('/checkout', name: 'checkout')]
     public function index(): Response
     {
         return $this->render('checkout/index.html.twig', [
