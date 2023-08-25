@@ -48,12 +48,54 @@ final class Version20230824040128 extends AbstractMigration
         $this->addSql('ALTER TABLE pricing_plan_pricing_plan_feature ADD CONSTRAINT FK_D19087D429628C71 FOREIGN KEY (pricing_plan_id) REFERENCES pricing_plan (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE pricing_plan_pricing_plan_feature ADD CONSTRAINT FK_D19087D46C9002D8 FOREIGN KEY (pricing_plan_feature_id) REFERENCES pricing_plan_feature (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE pricing_plan_benefit ADD CONSTRAINT FK_E6A62C5F29628C71 FOREIGN KEY (pricing_plan_id) REFERENCES pricing_plan (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+
+        $this->addSql("INSERT INTO pricing_plan VALUES(nextval('pricing_plan_id_seq'), 'Free', 0)");
+        $this->addSql("INSERT INTO pricing_plan VALUES(nextval('pricing_plan_id_seq'), 'Pro', 15)");
+        $this->addSql("INSERT INTO pricing_plan VALUES(nextval('pricing_plan_id_seq'), 'Enterprise', 29)");
+
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 1, '10 users included')");
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 1, '2 GB of Storage')");
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 1, 'Email Support')");
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 1, 'Help Center Access')");
+
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 2, '20 users included')");
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 2, '16 GB of Storage')");
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 2, 'Priority Email Support')");
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 2, 'Help Center Access')");
+
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 3, '40 users included')");
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 3, '64 GB of Storage')");
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 3, 'Phone and Email Support')");
+        $this->addSql("INSERT INTO pricing_plan_benefit VALUES(nextval('pricing_plan_benefit_id_seq'), 3, 'Help Center Access')");
+
+        $this->addSql("INSERT INTO pricing_plan_feature VALUES(nextval('pricing_plan_benefit_id_seq'), 'Public')");
+        $this->addSql("INSERT INTO pricing_plan_feature VALUES(nextval('pricing_plan_benefit_id_seq'), 'Private')");
+        $this->addSql("INSERT INTO pricing_plan_feature VALUES(nextval('pricing_plan_benefit_id_seq'), 'Permissions')");
+        $this->addSql("INSERT INTO pricing_plan_feature VALUES(nextval('pricing_plan_benefit_id_seq'), 'Sharing')");
+        $this->addSql("INSERT INTO pricing_plan_feature VALUES(nextval('pricing_plan_benefit_id_seq'), 'Unlimited Membership')");
+        $this->addSql("INSERT INTO pricing_plan_feature VALUES(nextval('pricing_plan_benefit_id_seq'), 'Extra Security')");
+
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(1, 1)");
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(1, 3)");
+
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(2, 1)");
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(2, 2)");
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(2, 3)");
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(2, 4)");
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(2, 5)");
+
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(3, 1)");
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(3, 2)");
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(3, 3)");
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(3, 4)");
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(3, 5)");
+        $this->addSql("INSERT INTO pricing_pricing_plan_feature VALUES(3, 6)");
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SCHEMA public');
+
         $this->addSql('DROP SEQUENCE pricing_plan_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE pricing_plan_benefit_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE pricing_plan_feature_id_seq CASCADE');

@@ -11,8 +11,12 @@ class PracticeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(): Response
     {
+        $pricingPlans = $this->$this->getDoctrine()
+            ->getRepository(PricingPlan::class)
+            ->findAll();
+
         return $this->render('practice/index.html.twig', [
-            'controller_name' => 'PracticeController',
+            'pricing_plans' => $pricingPlans,
         ]);
     }
 }
